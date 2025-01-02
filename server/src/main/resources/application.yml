@@ -1,0 +1,56 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    druid:
+      driver-class-name: ${bk.datasource.driver-class-name}
+      url: jdbc:mysql://${bk.datasource.host}:${bk.datasource.port}/${bk.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${bk.datasource.username}
+      password: ${bk.datasource.password}
+  files:
+    upload-dir: ../img
+  redis:
+    host: ${bk.redis.host}
+    port: ${bk.redis.port}
+    password: ${bk.redis.password}
+    database: ${bk.redis.database}
+
+mybatis:
+  #Mapper configuration file
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.entity
+  configuration:
+    #Enable camel hump naming
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      mapper: debug
+      service: info
+      controller: info
+
+bk:
+  jwt:
+    #Set the key to use when encrypting jwt signatures
+#    admin-secret-key: itcast
+    #Set the jwt expiration time
+    admin-ttl: 7200000
+    #Set the token name passed by the front-end
+    admin-token-name: token
+    #user
+#    user-secret-key: itbk
+    user-ttl: 7200000
+    user-token-name: authentication
+  wechat:
+    appid: ${bk.wechat.appid}
+    secret: ${bk.wechat.secret}
+  shop:
+    address: No.1 Central Street, Harbin
+  baidu:
+    ak: kSOqRS4DRy3o5MpatIf2C37Noan3GEB6
